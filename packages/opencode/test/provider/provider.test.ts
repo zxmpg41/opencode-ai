@@ -1724,13 +1724,12 @@ test("provider and model theme from config", async () => {
       )
     },
   })
-  await Instance.provide({
+  await WithInstance.provide({
     directory: tmp.path,
-    init: async () => {
+    fn: async () => {
       set("ANTHROPIC_API_KEY", "test-api-key")
       set("OPENAI_API_KEY", "test-openai-key")
-    },
-    fn: async () => {
+      
       const providers = await list()
       const provider = providers[ProviderID.anthropic]
       expect(provider.theme).toBe("provider-theme")
